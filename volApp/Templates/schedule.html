@@ -1,0 +1,25 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Schedule
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+<form method="POST" action="" enctype="multipart/form-data">
+<br>
+  {% csrf_token %}
+    {{ form|crispy }}
+    <br>
+    <input class="btn btn-primary" type="submit" name="Add to Schedule">
+</form>
+
+{% endblock content %}
+

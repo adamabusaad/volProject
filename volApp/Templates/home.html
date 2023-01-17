@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+    {% block title %}
+         Home
+    {% endblock title %}
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{{% block styles %}
+
+<style>
+body {
+	background: #f6f5f7;
+
+}
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  border: 1px solid blue;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+p.round3 {
+  border: 2px solid red;
+  border-radius: 12px;
+  padding: 5px;
+}
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: white;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+</style>
+{% endblock styles %}
+{% block content %}
+
+  <!-- ***** Preloader Start ***** -->
+    <div class="container ">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="flip-card" style="border: 2px solid blue;border-radius: 12px;
+  padding: 5px;">
+  <div class="flip-card-inner " >
+    <div class="flip-card-front">
+      <img src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-High-Quality-Image.png" alt="Avatar" style="width:300px;height:300px;">
+    </div>
+    <div class="flip-card-back" style="border: 2px solid blue;border-radius: 12px;
+  padding: 5px; font-size:15px;">
+      <h1 class="mt-2" style="text-decoration: overline underline;font-family:Sofia sans-serif;"> {{request.user.username}}</h1>
+      <br>
+      <p>Email-Address : {{request.user.email}}</p>
+      <p>First name:   &nbsp;{{request.user.first_name}}</p>
+      <p>Last Name :  &nbsp;{{request.user.last_name}}</p>
+
+      {% if request.user.role == 1  %}
+      <p>Role :   &nbsp;Admin</p>
+      {% elif request.user.role == 2 %}
+      <p>Role :   &nbsp;Student</p>
+      {% elif request.user.role == 3 %}
+      <p>Role :   &nbsp;Secretary</p>
+
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+        </div>
+        <div class="col-lg-5 align-self-center">
+          <form id="contact" action="" method="get">
+
+
+            <div class="row">
+              <div class="col-lg-12">
+                <h2 class="justify-content-center text-center">Contact Us</h2>
+                <fieldset>
+                  <input type="name" name="name" id="name" placeholder="Name" autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <input type="surname" name="surname" id="surname" placeholder="Surname" autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <input type="text" name="email" id="ccz" pattern="[^ @]*@[^ @]*" placeholder="Your Email" required="">
+                </fieldset>
+                <fieldset>
+                  <input type="text" name="message" id="cc"  placeholder="Message" required="">
+                </fieldset>
+              </div>
+
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-ssubmit" class="main-button">Submit Request</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+
+
+
+<br><br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+<div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3>Volunteer Management</h3>
+                        <p>
+                          Praesent sed lobortis mi. Suspendisse vel
+                          placerat ligula. Vivamus ac sem lacus. Ut
+                          vehicula rhoncus elementum. Etiam quis
+                          tristique lectus. Aliquam in arcu eget
+                          velit pulvinar dictum vel in justo.
+                        </p>
+                    </div>
+                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                </div>
+                <p class="copyright">Volunteer Management © 2023</p>
+            </div>
+        </footer>
+    </div>
+{% endblock content %}

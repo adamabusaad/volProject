@@ -1,0 +1,53 @@
+{%  extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Students
+{% endblock title %}
+
+
+{% block navbar %}
+
+{%  include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+
+ <h2 class="justify-content-center d-flex mt-3 mb-3" >Volunteers List</h2>
+<br>
+
+
+
+
+        <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Username</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email </th>
+            <th scope="col">Volunteer City</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for students in object_list %}
+            {% csrf_token %}
+  {% if  students.role == 2 %}
+  {% if students.city is not none  %}
+    <tr>
+        <td>{{ students.username }}</td>
+        <td>{{ students.first_name }}</td>
+      <td>{{ students.last_name }}</td>
+      <td>{{ students.email }}</td>
+      <td>{{ students.city }}</td>
+    </tr>
+  {% endif %}
+  {% endif %}
+        {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
+
