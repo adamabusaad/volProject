@@ -18,3 +18,5 @@ class AddScheduleForm(ModelForm):
     class Meta:
         model = ScheduleModel
         fields = ['Reciever','username','subject', 'message']
+
+
